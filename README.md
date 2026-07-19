@@ -108,11 +108,11 @@
 
 
 ### 3.2 IMPLEMENTATION
-<img width="756" height="353" alt="image" src="https://github.com/user-attachments/assets/a5fc54e7-3e71-4114-85e8-024cfd799c7c" />
+<img width="450" height="210" alt="image" src="https://github.com/user-attachments/assets/a5fc54e7-3e71-4114-85e8-024cfd799c7c" />
 
 <Timing, Power Analysis of Single-cycle RV32I>
 
 
-<img width="758" height="355" alt="image" src="https://github.com/user-attachments/assets/c3c9eabf-b1ba-4379-baf0-ac255819ad6b" />
+<img width="450" height="210" alt="image" src="https://github.com/user-attachments/assets/c3c9eabf-b1ba-4379-baf0-ac255819ad6b" />
 
 <Timing, Power Analysis of Multi-cycle RV32I>
