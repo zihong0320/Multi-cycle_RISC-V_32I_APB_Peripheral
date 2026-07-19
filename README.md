@@ -21,6 +21,7 @@
 
 ### 2.1 Overall Structure
 <img width="374" height="218" alt="image" src="https://github.com/user-attachments/assets/f322731b-932f-43a7-bfa3-36ae7e3054a7" />
+
 - Multi-cycle CPU Core
   - 명령어의 실행 과정을 Fetch, Decode, Execute, Memory, Write-Back로 분할해 순차적으로 처리하는 프로세서 코어
 
@@ -34,6 +35,7 @@
 
 ### 2.2 Core
 <img width="357" height="226" alt="image" src="https://github.com/user-attachments/assets/e44876f7-5a69-414c-8223-674ca01a2b95" />
+
 - 5-stage
   - IF : 메모리에서 명령어를 Fetch
   - ID : 명령어 해석, 레지스터에서 값 가져옴 
