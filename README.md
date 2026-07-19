@@ -10,7 +10,7 @@
 
 #### 개발 환경 및 ARCHITECTURE
 - MCU : HAVARD Architecture 기반 RISC-V 32I
-- INTERFACE(BUS) : APB
+- Interface(BUS) : APB
 - Tool : Vivado
 - Language : Systemverilog
 - FPGA Board : Basys3
