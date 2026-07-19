@@ -56,7 +56,7 @@
 - APB Master
   - 모든 slave에 Address와 Data를 뿌려주는 broadcasting 방식 적용
   - APB Interface 주요 신호
-    - PSEL, PENABLE, PWRITE, PADDR, PWDATA, PRDATA, PREADY, PSLVERR
+    : PSEL, PENABLE, PWRITE, PADDR, PWDATA, PRDATA, PREADY, PSLVERR
 
 - APB Slave
   - RAM, GPO, GPIO, FND, UART를 APB Slave로 구성
@@ -70,7 +70,7 @@
     - UART, FND, GPIO, GPI(사용 x), GPO, BRAM
 
   - Offset
-    - 주변 장치의 Base Address로부터 상대적인 거리(주변 장치 내부 Register 주소)
+    : 주변 장치의 Base Address로부터 상대적인 거리(주변 장치 내부 Register 주소)
 
 
 
@@ -82,6 +82,7 @@
 <C 코드(UP, DOWN game) 적용 사진>
 
 
+#### 3.2 UP, DOWN GAME
 - C code(UP, DOWN 게임)
   - UART로 4자리 정답값 설정 후 ‘s’ send
   - Switch로 예측값 설정
