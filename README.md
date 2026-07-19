@@ -26,10 +26,10 @@
 
 
   -  Memory Map I/O
-    CPU가 주변 장치에 접근할 때, 별도의 I/O 명령어를 쓰지 않고 일반 메모리 주소(Memory Address) 공간을 할당하여 접근하는 방식
+      : CPU가 주변 장치에 접근할 때, 별도의 I/O 명령어를 쓰지 않고 일반 메모리 주소(Memory Address) 공간을 할당하여 접근하는 방식
     
   - Offset
-    주변 장치의 Base Address로부터 상대적인 거리(주변 장치 내부 Register 주소)
+      : 주변 장치의 Base Address로부터 상대적인 거리(주변 장치 내부 Register 주소)
 
 ## 2. Hardware Architecture
 
