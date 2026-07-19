@@ -107,6 +107,3 @@
 <img width="758" height="355" alt="image" src="https://github.com/user-attachments/assets/c3c9eabf-b1ba-4379-baf0-ac255819ad6b" />
 
 <Timing, Power Analysis of Multi-cycle RV32I>
-
-
-## 4. Trouble Shooting
