@@ -20,7 +20,7 @@
 ## 2. Hardware Architecture
 
 ### 2.1 Overall Structure
-<img width="374" height="218" alt="image" src="https://github.com/user-attachments/assets/f322731b-932f-43a7-bfa3-36ae7e3054a7" />
+<img width="953" height="555" alt="image" src="https://github.com/user-attachments/assets/1c5d55da-386a-45b5-b02e-8f3085ced0be" />
 
 - Multi-cycle CPU Core
   - 명령어의 실행 과정을 Fetch, Decode, Execute, Memory, Write-Back로 분할해 순차적으로 처리하는 프로세서 코어
@@ -34,7 +34,7 @@
 
 
 ### 2.2 Core
-<img width="357" height="226" alt="image" src="https://github.com/user-attachments/assets/e44876f7-5a69-414c-8223-674ca01a2b95" />
+<img width="913" height="586" alt="image" src="https://github.com/user-attachments/assets/7d1aab43-9888-432e-b5c5-0f0f12a9661c" />
 
 - 5-stage
   - IF : 메모리에서 명령어를 Fetch
@@ -50,20 +50,35 @@
 
 
 ### 2.3 APB
-<img width="232" height="226" alt="image" src="https://github.com/user-attachments/assets/2fed3dda-3280-499e-a6b5-083db2a7a840" />
+<img width="591" height="572" alt="image" src="https://github.com/user-attachments/assets/26326cea-1d5a-4d06-b674-2be011ce302b" />
 
+
+- APB Master
+  - 모든 slave에 Address와 Data를 뿌려주는 broadcasting 방식 적용
+  - APB Interface 주요 신호
+    - PSEL, PENABLE, PWRITE, PADDR, PWDATA, PRDATA, PREADY, PSLVERR
+
+- APB Slave
+  - RAM, GPO, GPIO, FND, UART를 APB Slave로 구성
 
 
 ### 2.4 MMIO
-<img width="347" height="175" alt="image" src="https://github.com/user-attachments/assets/d3039d7c-be52-4a83-91f7-b26d4125885f" />
+<img width="881" height="446" alt="image" src="https://github.com/user-attachments/assets/c7ec121e-5d82-4270-b434-2ae4dfa3497d" />
 
+  -  Memory Map I/O
+    - CPU가 주변 장치에 접근할 때, 별도의 I/O 명령어를 쓰지 않고 일반 메모리 주소(Memory Address) 공간을 할당하여 접근하는 방식
+    - UART, FND, GPIO, GPI(사용 x), GPO, BRAM
+
+  - Offset
+    - 주변 장치의 Base Address로부터 상대적인 거리(주변 장치 내부 Register 주소)
 
 
 
 ## 3. Result
 
 ### 3.1 FPGA
-<img width="364" height="196" alt="image" src="https://github.com/user-attachments/assets/ee4b55bf-0558-46dd-b791-3201c5d7962c" />
+<img width="723" height="405" alt="image" src="https://github.com/user-attachments/assets/d3421272-af6c-4ab2-9e77-97f5e4521b5c" />
+
 <C 코드(UP, DOWN game) 적용 사진>
 
 
@@ -81,12 +96,15 @@
 <동영상>
 
 
+
 ### 3.2 IMPLEMENTATION
-<img width="296" height="141" alt="image" src="https://github.com/user-attachments/assets/997fc49f-7124-4fda-b0d7-0a402931a08b" />
+<img width="756" height="353" alt="image" src="https://github.com/user-attachments/assets/a5fc54e7-3e71-4114-85e8-024cfd799c7c" />
+
 <Timing, Power Analysis of Single-cycle RV32I>
 
 
-<img width="296" height="141" alt="image" src="https://github.com/user-attachments/assets/4c05c8a7-c41d-4606-8c7b-0bb8eb60b250" />
+<img width="758" height="355" alt="image" src="https://github.com/user-attachments/assets/c3c9eabf-b1ba-4379-baf0-ac255819ad6b" />
+
 <Timing, Power Analysis of Multi-cycle RV32I>
 
 
