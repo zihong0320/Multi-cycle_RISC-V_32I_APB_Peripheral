@@ -78,6 +78,7 @@
 
 ### 2.4 MMIO
 <img width="881" height="446" alt="image" src="https://github.com/user-attachments/assets/c7ec121e-5d82-4270-b434-2ae4dfa3497d" />
+
 <전체 MMIO>
 
 - UART, FND, GPIO, GPI(사용 x), GPO, BRAM
