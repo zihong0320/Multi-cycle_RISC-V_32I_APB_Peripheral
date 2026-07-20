@@ -1,4 +1,4 @@
-# Multi-cycle-RISC-V-32I-APB-Peripheral
+# Multi-cycle_RISC-V_32I_APB_Peripheral
 
 
 ## 0. Summary
@@ -23,9 +23,19 @@
 ### 1.2 Multi Cycle
 
 ### 1.3 APB Interface & MMIO
+  - APB(Advanced Peripheral Bus)
+      - 저속 & 저전력 최적화
+      - 단순한 구조 (No Pipeline) - 한 번에 하나의 데이터를 주고 받음
+      - Signal
+        - PCLK / PRESETn: APB 버스의 클럭 신호와 리셋(Active Low) 신호
+        - PADDR: 마스터가 접근하려는 Peripheral의 내부 주소(Address) 버스
+        - PWRITE: Read/Write를 결정(1이면 Write, 0이면 Read)
+        - PSEL (Peripheral Select): 마스터가 특정 슬레이브 장치를 선택하는 Chip Select 신호
+        - PENABLE: 데이터 전송의 실제 타이밍을 제어하는 신호
+        - PWDATA / PRDATA: 쓰기 데이터(Write Data) 버스 / 읽기 데이터(Read Data) 버스
+        - PREADY : 슬레이브가 데이터 준비 완료됐다고 마스터에게 알려주는 신호입니다. (준비가 안 되었다면 마스터는 대기)
 
-
-  -  Memory Map I/O
+  - Memory Map I/O
       - CPU가 주변 장치에 접근할 때, 별도의 I/O 명령어를 쓰지 않고 일반 메모리 주소(Memory Address) 공간을 할당하여 접근하는 방식
     
   - Offset
