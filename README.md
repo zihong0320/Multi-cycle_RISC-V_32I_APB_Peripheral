@@ -24,7 +24,7 @@
 
 ### 1.3 APB Interface & MMIO
   - APB(Advanced Peripheral Bus)
-  - <img width="560" height="340" alt="image" src="https://github.com/user-attachments/assets/ea29257f-32df-4bf2-b932-d6f08a070f46" />
+    <img width="560" height="340" alt="image" src="https://github.com/user-attachments/assets/ea29257f-32df-4bf2-b932-d6f08a070f46" />
 
       - 저속 & 저전력 최적화
       - 단순한 구조 (No Pipeline) - 한 번에 하나의 데이터를 주고 받음
