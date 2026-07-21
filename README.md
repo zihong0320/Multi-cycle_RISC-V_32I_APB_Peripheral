@@ -40,7 +40,7 @@
         
   - Havard Architecture
     - 명령어(Instruction)가 저장되는 메모리"와 "데이터(Data)가 저장되는 메모리"가 물리적으로 완전히 분리된 컴퓨터 구조
-      <br>
+      <br><br>
     - 특징
       - 독립된 메모리 영역 : Instruction Memory(ROM)과 Data Memory(RAM) 분리
       - 독립된 버스 (Bus): CPU가 명령어를 가져오는 경로(Instruction Bus)와 데이터를 읽고 쓰는 경로(Data Bus)가 분리
