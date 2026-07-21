@@ -197,7 +197,7 @@
 <C 코드(UP, DOWN game) 적용 사진>
 
 <br><br>
-#### 3.2 UP, DOWN GAME
+### 3.2 UP, DOWN GAME
 - C code(UP, DOWN 게임)
   - UART로 4자리 정답값 설정 후 ‘s’ send
   - Switch로 예측값 설정
@@ -213,7 +213,7 @@
 
 <br><br><br>
 
-### 3.2 IMPLEMENTATION
+### 3.3 IMPLEMENTATION
 <img width="450" height="210" alt="image" src="https://github.com/user-attachments/assets/a5fc54e7-3e71-4114-85e8-024cfd799c7c" />
 
 <Timing, Power Analysis of Single-cycle RV32I>
