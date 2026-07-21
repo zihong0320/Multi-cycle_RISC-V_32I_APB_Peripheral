@@ -63,8 +63,9 @@
    
       
     - 정의 : 32비트 정수(Integer) 기본 명령어 SET
-    <br>
+    <br><br>
     - 6가지 Instruction Format 존재
+    
       - R-type : 레지스터 간 산술/논리 연산
         - ex) ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND
           <br>
