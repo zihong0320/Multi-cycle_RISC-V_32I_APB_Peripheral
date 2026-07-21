@@ -95,7 +95,7 @@
 
     - 오래 걸리는 명령어(LW)를 기준으로 클럭 주기를 크게 설정해야 함 -> 느려짐
     - 명령어를 최대 5단계로 나눠 클럭 주기를 낮출 수 있음
-<br><br>
+    <br><br>
 
   - Instruction 실행 5가지 단계
     - IF (Instruction Fetch): 메모리에서 명령어를 가져옴
@@ -104,7 +104,7 @@
     - MEM (Memory Access): 메모리에 데이터를 쓰거나(SW) 읽음(LW)
     - WB (Write Back): 최종 결과를 레지스터에 기록함
 
-<br><br><br>   
+<br><br>  
       
 ### 1.3 APB Interface & MMIO
   - APB(Advanced Peripheral Bus)
