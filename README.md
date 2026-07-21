@@ -72,6 +72,9 @@
   - Single-Cycle CPU : 하나의 명령어(Instruction)를 실행할 때, 한 Clock Cycle 안에 처리하는 CPU 설계 구조
 
   - Multi-Cycle CPU의 장점(than Single-Cycle CPU)
+
+    <img width="633" height="248" alt="image" src="https://github.com/user-attachments/assets/976b80d8-8097-4277-a163-72e3318e5e77" />
+
     - 오래 걸리는 명령어(LW)를 기준으로 클럭 주기를 크게 설정해야 함 -> 느려짐
     - 명령어를 최대 5단계로 나눠 클럭 주기를 낮출 수 있음
       
