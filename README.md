@@ -50,7 +50,12 @@
 
 
     - RISC-V 32I
+      
+      <img width="1028" height="876" alt="image" src="https://github.com/user-attachments/assets/dcb45d93-9d0b-4e5b-b567-955430d4a82d" />
+
+
       <img width="720" height="295" alt="image" src="https://github.com/user-attachments/assets/66d2dd01-eb8d-43f7-9fea-04adff1b0fa4" />
+   
       
       - 정의 : 32비트 정수(Integer) 기본 명령어 SET
       - 6가지 Instruction Format 존재
