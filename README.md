@@ -38,6 +38,7 @@
         
   - Havard Architecture
     - 명령어(Instruction)가 저장되는 메모리"와 "데이터(Data)가 저장되는 메모리"가 물리적으로 완전히 분리된 컴퓨터 구조
+      <br>
     - 특징
       - 독립된 메모리 영역 : Instruction Memory(ROM)과 Data Memory(RAM) 분리
       - 독립된 버스 (Bus): CPU가 명령어를 가져오는 경로(Instruction Bus)와 데이터를 읽고 쓰는 경로(Data Bus)가 분리
@@ -50,7 +51,8 @@
       - 병복현상 발생 가능 - 하나의 버스로 명령어와 데이터를 번갈아 가져와야 하기 때문에 버스에서 병목 현상 발생 가능
 <br><br>
 
-    - RISC-V 32I
+
+  - RISC-V 32I
       
       <img width="1028" height="876" alt="image" src="https://github.com/user-attachments/assets/dcb45d93-9d0b-4e5b-b567-955430d4a82d" />
 
@@ -58,21 +60,26 @@
       <img width="720" height="295" alt="image" src="https://github.com/user-attachments/assets/66d2dd01-eb8d-43f7-9fea-04adff1b0fa4" />
    
       
-      - 정의 : 32비트 정수(Integer) 기본 명령어 SET
+    - 정의 : 32비트 정수(Integer) 기본 명령어 SET
 <br>
-      - 6가지 Instruction Format 존재
-        - R-type : 레지스터 간 산술/논리 연산
-          - ex) ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND
-        - I-type : 상수(Immediate) 연산, Load, JALR
-          - ex) ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI / LB, LH, LW, LBU, LHU / JALR
-        - S-type : Data Mem에 저장 (Store)
-          - ex) SB, SH, SW
-        - B-Type : 조건 분기 (Branch)
-          - ex) BEQ, BNE, BLT, BGE, BLTU, BGEU
-        - U-Type : 상위 20비트 상수 설정
-          - ex) LUI, AUIPC
-        - J-Type : 무조건 점프 (Jump)
-          - ex) JAL
+    - 6가지 Instruction Format 존재
+      - R-type : 레지스터 간 산술/논리 연산
+        - ex) ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND
+          <br>
+      - I-type : 상수(Immediate) 연산, Load, JALR
+        - ex) ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI / LB, LH, LW, LBU, LHU / JALR
+          <br>
+      - S-type : Data Mem에 저장 (Store)
+        - ex) SB, SH, SW
+          <br>
+      - B-Type : 조건 분기 (Branch)
+        - ex) BEQ, BNE, BLT, BGE, BLTU, BGEU
+          <br>
+      - U-Type : 상위 20비트 상수 설정
+        - ex) LUI, AUIPC
+          <br>
+      - J-Type : 무조건 점프 (Jump)
+        - ex) JAL
 <br><br><br>
 ### 1.2 Multi Cycle
   - Multi-Cycle CPU : 하나의 명령어(Instruction)를 실행하는 데 여러 클럭 사이클(Clock Cycles)에 걸쳐 나누어 처리하는 CPU 설계 구조
