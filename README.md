@@ -102,12 +102,16 @@
         - PENABLE: 데이터 전송의 실제 타이밍을 제어하는 신호
         - PWDATA / PRDATA: 쓰기 데이터(Write Data) 버스 / 읽기 데이터(Read Data) 버스
         - PREADY : 슬레이브가 데이터 준비 완료됐다고 마스터에게 알려주는 신호입니다. (준비가 안 되었다면 마스터는 대기)
-
+      - APB Master와 Slave의 통신 방식
+        - Master의 신호는 Slave에게 모두 보내는 Broadcasting 방식
+        - 그러나, Master가 PSELx 신호로 Slave Select
+           
   - Memory Map I/O
       - CPU가 주변 장치에 접근할 때, 별도의 I/O 명령어를 쓰지 않고 일반 메모리 주소(Memory Address) 공간을 할당하여 접근하는 방식
     
   - Offset
       - 주변 장치의 Base Address로부터 상대적인 거리(주변 장치 내부 Register 주소)
+    
 
 ## 2. Hardware Architecture
 
