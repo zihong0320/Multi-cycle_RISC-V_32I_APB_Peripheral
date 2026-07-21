@@ -39,7 +39,7 @@
 <br><br>     
         
   - Havard Architecture
-    - 명령어(Instruction)가 저장되는 메모리"와 "데이터(Data)가 저장되는 메모리"가 물리적으로 완전히 분리된 컴퓨터 구조
+    - "명령어(Instruction)가 저장되는 메모리"와 "데이터(Data)가 저장되는 메모리"가 물리적으로 완전히 분리된 컴퓨터 구조
       <br><br>
     - 특징
       - 독립된 메모리 영역 : Instruction Memory(ROM)과 Data Memory(RAM) 분리
