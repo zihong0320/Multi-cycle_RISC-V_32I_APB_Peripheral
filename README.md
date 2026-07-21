@@ -8,6 +8,8 @@
 - APB Bus 기반 Peripheral 설계
 - C코드 알고리즘(UP, DOWN 게임) 적용
 
+
+
 #### 개발 환경 및 ARCHITECTURE
 - MCU : HAVARD Architecture 기반 RISC-V 32I
 - Interface(BUS) : APB
