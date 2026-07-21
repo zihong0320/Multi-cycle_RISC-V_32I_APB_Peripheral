@@ -23,12 +23,12 @@
   - RISC-V
     - 2010년 미국 UC 버클리 대학에서 시작된 오픈소스 개방형 명령어 집합 아키텍처(ISA, Instruction Set Architecture)
       - ISA : CPU가 알아듣는 언어 체계
-    <br>
+    <br><br>
     - 특징
       - Open Source : 라이센스 비용 없이 자유롭게 CPU 코어를 설계, 판매 가능
       - 모듈형 설계 : 기본 틀에 필요한 모듈 추가 가능
       - CPU 구조 단순 : 핵심 명령어가 많지 않음
-    <br>
+    <br><br>
     - RISC-V 구성 요소
       - Instruction Memory : Instruction을 저장하는 memory(rom), PC가 가리키는 주소의 명령어를 읽음
       - Register file : ALU 연산을 위한 임시 저장 공간(CPU 내부 존재)
