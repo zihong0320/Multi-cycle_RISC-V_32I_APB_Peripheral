@@ -18,10 +18,72 @@
 
 ## 1. Instruction
 
-### 1.1 RISC-V 32I
+### 1.1 RISC-V
+  - RISC-V
+    - 2010년 미국 UC 버클리 대학에서 시작된 오픈소스 개방형 명령어 집합 아키텍처(ISA, Instruction Set Architecture)
+      - ISA : CPU가 알아듣는 언어 체계
+    - 특징
+      - Open Source : 라이센스 비용 없이 자유롭게 CPU 코어를 설계, 판매 가능
+      - 모듈형 설계 : 기본 틀에 필요한 모듈 추가 가능
+      - CPU 구조 단순 : 핵심 명령어가 많지 않음
+    - RISC-V 구성 요소
+      - Instruction Memory : Instruction을 저장하는 memory(rom), PC가 가리키는 주소의 명령어를 읽음
+      - Register file : ALU 연산을 위한 임시 저장 공간(CPU 내부 존재)
+      - Data Memory : CPU 외부에 있는 저장 공간(RAM), Data를 store 하거나 load 하기 위한 공간
+      - ALU : 실제 연산을 수행하는 공간(+, -, /, >>, <<, <<<, &, |, ^, <, > 등)
+      - Control unit : 명령어를 해석하여 CPU의 동작을 제어
+      - Program Counter : 다음에 실행할 명령어의 주소를 가리키는 32비트 레지스터
+     
+        
+  - Havard Architecture
+    - 명령어(Instruction)가 저장되는 메모리"와 "데이터(Data)가 저장되는 메모리"가 물리적으로 완전히 분리된 컴퓨터 구조
+    - 특징
+      - 독립된 메모리 영역 : Instruction Memory(ROM)과 Data Memory(RAM) 분리
+      - 독립된 버스 (Bus): CPU가 명령어를 가져오는 경로(Instruction Bus)와 데이터를 읽고 쓰는 경로(Data Bus)가 분리
+      - Instruction Fetch(CPU가 명령어 Fetch)와 데이터 Read/Write 동시에 가능
+     
+    - Von Neumann(폰 노이만) Architecture
+      - Von Neumann의 메모리 구조 : 명령어와 데이터가 단일 메모리에 혼재
+      - Von Neumann의 버스 : 하나의 버스를 공유
+      - Von Neumann 동작 속도 : 상대적으로느림(Havard 구조는 명령어 Fetch와 데이터 Access 동시 수행 가능하므로 동작 속도가 폰 노이만 구조에 비해 빠름)
+      - 병복현상 발생 가능 - 하나의 버스로 명령어와 데이터를 번갈아 가져와야 하기 때문에 버스에서 병목 현상 발생 가능
 
+
+    - RISC-V 32I
+      <img width="720" height="295" alt="image" src="https://github.com/user-attachments/assets/66d2dd01-eb8d-43f7-9fea-04adff1b0fa4" />
+      
+      - 정의 : 32비트 정수(Integer) 기본 명령어 SET
+      - 6가지 Instruction Format 존재
+        - R-type : 레지스터 간 산술/논리 연산
+          - ex) ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND
+        - I-type : 상수(Immediate) 연산, Load, JALR
+          - ex) ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI / LB, LH, LW, LBU, LHU / JALR
+        - S-type : Data Mem에 저장 (Store)
+          - ex) SB, SH, SW
+        - B-Type : 조건 분기 (Branch)
+          - ex) BEQ, BNE, BLT, BGE, BLTU, BGEU
+        - U-Type : 상위 20비트 상수 설정
+          - ex) LUI, AUIPC
+        - J-Type : 무조건 점프 (Jump)
+          - ex) JAL
+        
 ### 1.2 Multi Cycle
+  - Multi-Cycle CPU : 하나의 명령어(Instruction)를 실행하는 데 여러 클럭 사이클(Clock Cycles)에 걸쳐 나누어 처리하는 CPU 설계 구조
+  - Single-Cycle CPU : 하나의 명령어(Instruction)를 실행할 때, 한 Clock Cycle 안에 처리하는 CPU 설계 구조
 
+  - Multi-Cycle CPU의 장점(than Single-Cycle CPU)
+    - 오래 걸리는 명령어(LW)를 기준으로 클럭 주기를 크게 설정해야 함 -> 느려짐
+    - 명령어를 최대 5단계로 나눠 클럭 주기를 낮출 수 있음
+      
+  - Instruction 실행 5가지 단계
+    - IF (Instruction Fetch): 메모리에서 명령어를 가져옴
+    - ID (Instruction Decode & Register Read): 명령어를 해석하고 레지스터 값을 읽음
+    - EX (Execution / Address Calculation): ALU를 통해 연산하거나 메모리 주소를 계산함
+    - MEM (Memory Access): 메모리에 데이터를 쓰거나(SW) 읽음(LW)
+    - WB (Write Back): 최종 결과를 레지스터에 기록함
+
+   
+      
 ### 1.3 APB Interface & MMIO
   - APB(Advanced Peripheral Bus)
     
