@@ -15,7 +15,7 @@
 - Tool : Vivado
 - Language : Systemverilog
 - FPGA Board : Basys3
-<br><br><br>
+<br><br>
 
 ## 1. Instruction
 
@@ -23,10 +23,12 @@
   - RISC-V
     - 2010년 미국 UC 버클리 대학에서 시작된 오픈소스 개방형 명령어 집합 아키텍처(ISA, Instruction Set Architecture)
       - ISA : CPU가 알아듣는 언어 체계
+    <br>
     - 특징
       - Open Source : 라이센스 비용 없이 자유롭게 CPU 코어를 설계, 판매 가능
       - 모듈형 설계 : 기본 틀에 필요한 모듈 추가 가능
       - CPU 구조 단순 : 핵심 명령어가 많지 않음
+    <br>
     - RISC-V 구성 요소
       - Instruction Memory : Instruction을 저장하는 memory(rom), PC가 가리키는 주소의 명령어를 읽음
       - Register file : ALU 연산을 위한 임시 저장 공간(CPU 내부 존재)
@@ -61,7 +63,7 @@
    
       
     - 정의 : 32비트 정수(Integer) 기본 명령어 SET
-<br>
+    <br>
     - 6가지 Instruction Format 존재
       - R-type : 레지스터 간 산술/논리 연산
         - ex) ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND
@@ -81,6 +83,7 @@
       - J-Type : 무조건 점프 (Jump)
         - ex) JAL
 <br><br><br>
+
 ### 1.2 Multi Cycle
   - Multi-Cycle CPU : 하나의 명령어(Instruction)를 실행하는 데 여러 클럭 사이클(Clock Cycles)에 걸쳐 나누어 처리하는 CPU 설계 구조
   - Single-Cycle CPU : 하나의 명령어(Instruction)를 실행할 때, 한 Clock Cycle 안에 처리하는 CPU 설계 구조
