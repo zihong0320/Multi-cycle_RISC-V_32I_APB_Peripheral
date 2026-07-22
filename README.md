@@ -1,224 +1,147 @@
-# Multi-cycle_RISC-V_32I_APB_Peripheral
+# 🚀 Multi-cycle RISC-V 32I Core & APB Peripheral Project
 
+> **Basys3 FPGA 기반 Multi-cycle RISC-V (RV32I) 프로세서 및 APB 버스 기반 Peripherals 설계 프로젝트**
 
-## 0. Summary
+---
 
-#### ABSTRACT
-- Multi-cycle RISC-V 32I Core
-- APB Bus 기반 Peripheral 설계
-- C코드 알고리즘(UP, DOWN 게임) 적용
-<br><br>
+## 📌 0. Summary
 
-#### 개발 환경 및 ARCHITECTURE
-- MCU : HAVARD Architecture 기반 RISC-V 32I
-- Interface(BUS) : APB
-- Tool : Vivado
-- Language : Systemverilog
-- FPGA Board : Basys3
-<br><br>
+### 🎯 Overview
+* **CPU Core:** Harvard Architecture 기반 **Multi-cycle RISC-V 32I Processor**
+* **Bus Protocol:** AMBA **APB (Advanced Peripheral Bus)** Protocol
+* **Peripherals:** RAM (BRAM), UART, FND (7-Segment), GPIO, GPO
+* **Application:** C 언어로 작성된 **UP & DOWN 게임** 하드웨어 포팅 및 제어
 
-## 1. Instruction
+### 🛠️ Tech Stack & Environment
+* **Architecture:** RISC-V RV32I Base Integer Instruction Set
+* **Language:** SystemVerilog, C Language
+* **EDA Tool:** Xilinx Vivado
+* **Target Board:** Basys3 (Artix-7 FPGA)
 
-### 1.1 RISC-V
-  - RISC-V
-    - 2010년 미국 UC 버클리 대학에서 시작된 오픈소스 개방형 명령어 집합 아키텍처(ISA, Instruction Set Architecture)
-      - ISA : CPU가 알아듣는 언어 체계
-    <br><br>
-    - 특징
-      - Open Source : 라이센스 비용 없이 자유롭게 CPU 코어를 설계, 판매 가능
-      - 모듈형 설계 : 기본 틀에 필요한 모듈 추가 가능
-      - CPU 구조 단순 : 핵심 명령어가 많지 않음
-    <br><br>
-    - RISC-V 구성 요소
-      - Instruction Memory : Instruction을 저장하는 memory(rom), PC가 가리키는 주소의 명령어를 읽음
-      - Register file : ALU 연산을 위한 임시 저장 공간(CPU 내부 존재)
-      - Data Memory : CPU 외부에 있는 저장 공간(RAM), Data를 store 하거나 load 하기 위한 공간
-      - ALU : 실제 연산을 수행하는 공간(+, -, /, >>, <<, <<<, &, |, ^, <, > 등)
-      - Control unit : 명령어를 해석하여 CPU의 동작을 제어
-      - Program Counter : 다음에 실행할 명령어의 주소를 가리키는 32비트 레지스터
-<br><br>     
-        
-  - Havard Architecture
-    - "명령어(Instruction)가 저장되는 메모리"와 "데이터(Data)가 저장되는 메모리"가 물리적으로 완전히 분리된 컴퓨터 구조
-      <br><br>
-    - 특징
-      - 독립된 메모리 영역 : Instruction Memory(ROM)과 Data Memory(RAM) 분리
-      - 독립된 버스 (Bus): CPU가 명령어를 가져오는 경로(Instruction Bus)와 데이터를 읽고 쓰는 경로(Data Bus)가 분리
-      - Instruction Fetch(CPU가 명령어 Fetch)와 데이터 Read/Write 동시에 가능
-<br><br>     
-    - Von Neumann(폰 노이만) Architecture
-      - Von Neumann의 메모리 구조 : 명령어와 데이터가 단일 메모리에 혼재
-      - Von Neumann의 버스 : 하나의 버스를 공유
-      - Von Neumann 동작 속도 : 상대적으로느림(Havard 구조는 명령어 Fetch와 데이터 Access 동시 수행 가능하므로 동작 속도가 폰 노이만 구조에 비해 빠름)
-      - 병복현상 발생 가능 - 하나의 버스로 명령어와 데이터를 번갈아 가져와야 하기 때문
-<br><br>
+---
 
+## 1. Background & Fundamentals
 
-  - RISC-V 32I
-      
-      <img width="1028" height="876" alt="image" src="https://github.com/user-attachments/assets/dcb45d93-9d0b-4e5b-b567-955430d4a82d" />
+### 1.1 RISC-V & Harvard Architecture
+* **RISC-V (ISA):** 2010년 UC 버클리에서 개방한 오픈소스 ISA로, 모듈형 설계 및 단순한 명령어 구조가 특징입니다.
+* **Harvard Architecture:**
+  * **Instruction Memory**와 **Data Memory**의 **버스 및 메모리 영역이 물리적으로 분리**된 구조입니다.
+  * 명령어 Fetch와 데이터 Read/Write가 동시에 수행 가능하여 Von Neumann 구조 대비 **병목 현상이 적고 동작 속도가 빠릅니다.**
 
+#### RISC-V 32I Instruction Formats (6가지)
+| Format | Description | Target Instructions |
+| :--- | :--- | :--- |
+| **R-Type** | 레지스터 간 산술/논리 연산 | `ADD`, `SUB`, `SLL`, `SLT`, `XOR`, `SRL`, `OR`, `AND` 등 |
+| **I-Type** | Immediate 연산, Load, JALR | `ADDI`, `SLTI`, `ANDI`, `LW`, `LH`, `LB`, `JALR` 등 |
+| **S-Type** | Data Memory 저장 (Store) | `SW`, `SH`, `SB` |
+| **B-Type** | 조건 분기 (Branch) | `BEQ`, `BNE`, `BLT`, `BGE`, `BLTU`, `BGEU` |
+| **U-Type** | 상위 20비트 Immediate 설정 | `LUI`, `AUIPC` |
+| **J-Type** | 무조건 점프 (Jump) | `JAL` |
 
-      <img width="720" height="295" alt="image" src="https://github.com/user-attachments/assets/66d2dd01-eb8d-43f7-9fea-04adff1b0fa4" />
-   
-      
-    - 정의 : 32비트 정수(Integer) 기본 명령어 SET
-    <br><br>
-    - 6가지 Instruction Format 존재
-    
-      - R-type : 레지스터 간 산술/논리 연산
-        - ex) ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND
-          <br>
-      - I-type : 상수(Immediate) 연산, Load, JALR
-        - ex) ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI / LB, LH, LW, LBU, LHU / JALR
-          <br>
-      - S-type : Data Mem에 저장 (Store)
-        - ex) SB, SH, SW
-          <br>
-      - B-Type : 조건 분기 (Branch)
-        - ex) BEQ, BNE, BLT, BGE, BLTU, BGEU
-          <br>
-      - U-Type : 상위 20비트 상수 설정
-        - ex) LUI, AUIPC
-          <br>
-      - J-Type : 무조건 점프 (Jump)
-        - ex) JAL
-<br><br><br>
+---
 
-### 1.2 Multi Cycle
-  - Multi-Cycle CPU : 하나의 명령어(Instruction)를 실행하는 데 여러 클럭 사이클(Clock Cycles)에 걸쳐 나누어 처리하는 CPU 설계 구조
-  - Single-Cycle CPU : 하나의 명령어(Instruction)를 실행할 때, 한 Clock Cycle 안에 처리하는 CPU 설계 구조
-<br><br>
+### 1.2 Multi-Cycle CPU Architecture
+* **Single-Cycle의 한계:** 가장 오랫동안 실행되는 명령어(e.g., `LW`)의 Critical Path 시간에 맞춰 클럭 주기를 크게 설정해야 하므로 최대 동작 주파수가 낮아집니다.
+* **Multi-Cycle의 장점:** 명령어를 실행 단계별(최대 5 Stages)로 분할하여 **클럭 주기를 단축(최대 동작 주파수 향상)**시킵니다.
 
-  - Multi-Cycle CPU의 장점(than Single-Cycle CPU)
+#### 5-Stage Execution Flow
+1. **IF (Instruction Fetch):** 메모리에서 명령어를 가져옴
+2. **ID (Instruction Decode & Register Read):** 명령어 해석 및 레지스터 읽기
+3. **EX (Execution / Address Calculation):** ALU 연산 및 메모리 주소 계산
+4. **MEM (Memory Access):** Data Memory에 읽기/쓰기 수행 (`LW`, `SW`)
+5. **WB (Write Back):** 최종 연산 결과를 레지스터에 기록
 
-    <img width="633" height="248" alt="image" src="https://github.com/user-attachments/assets/976b80d8-8097-4277-a163-72e3318e5e77" />
+---
 
-    - 오래 걸리는 명령어(LW)를 기준으로 클럭 주기를 크게 설정해야 함 -> 느려짐
-    - 명령어를 최대 5단계로 나눠 클럭 주기를 낮출 수 있음
-    <br><br>
+### 1.3 APB Bus Interface & MMIO
 
-  - Instruction 실행 5가지 단계
-    - IF (Instruction Fetch): 메모리에서 명령어를 가져옴
-    - ID (Instruction Decode & Register Read): 명령어를 해석하고 레지스터 값을 읽음
-    - EX (Execution / Address Calculation): ALU를 통해 연산하거나 메모리 주소를 계산함
-    - MEM (Memory Access): 메모리에 데이터를 쓰거나(SW) 읽음(LW)
-    - WB (Write Back): 최종 결과를 레지스터에 기록함
+#### AMBA APB (Advanced Peripheral Bus)
+* 저속/저전력 주변장치 제어에 최적화된 단순 구조 버스 프로토콜입니다.
+* **Broadcasting & Selective Enable:** 마스터가 Address/Data를 모든 슬레이브 라인에 전송하면, 지정된 슬레이브만 `PSELx` 신호를 활성화하여 응답합니다.
 
-<br><br>  
-      
-### 1.3 APB Interface & MMIO
-  - APB(Advanced Peripheral Bus)
-    
-    <img width="560" height="340" alt="image" src="https://github.com/user-attachments/assets/ea29257f-32df-4bf2-b932-d6f08a070f46" />
+#### 주요 APB 신호선
+* `PCLK`, `PRESETn` : 시스템 클럭 및 Active-Low 리셋
+* `PADDR` : Peripheral 액세스 주소 버스
+* `PWRITE` : Read(`0`) / Write(`1`) 제어 신호
+* `PSELx` : 특정 Peripheral 선택 (Chip Select)
+* `PENABLE` : APB Access Phase 제어 신호
+* `PWDATA` / `PRDATA` : Write 데이터 버스 / Read 데이터 버스
+* `PREADY` : 슬레이브 응답 준비 완료 신호
 
-      - 저속 & 저전력 최적화
-      - 단순한 구조 (No Pipeline) - 한 번에 하나의 데이터를 주고 받음
-      - Signal
-        - PCLK / PRESETn: APB 버스의 클럭 신호와 리셋(Active Low) 신호
-        - PADDR: 마스터가 접근하려는 Peripheral의 내부 주소(Address) 버스
-        - PWRITE: Read/Write를 결정(1이면 Write, 0이면 Read)
-        - PSEL (Peripheral Select): 마스터가 특정 슬레이브 장치를 선택하는 Chip Select 신호
-        - PENABLE: 데이터 전송의 실제 타이밍을 제어하는 신호
-        - PWDATA / PRDATA: 쓰기 데이터(Write Data) 버스 / 읽기 데이터(Read Data) 버스
-        - PREADY : 슬레이브가 데이터 준비 완료됐다고 마스터에게 알려주는 신호입니다. (준비가 안 되었다면 마스터는 대기)
-      - APB Master와 Slave의 통신 방식
-        - Master의 신호는 Slave에게 모두 보내는 Broadcasting 방식
-        - 그러나, Master가 PSELx 신호로 Slave Select
- <br><br>          
-  - Memory Map I/O
-      - CPU가 주변 장치에 접근할 때, 별도의 I/O 명령어를 쓰지 않고 일반 메모리 주소(Memory Address) 공간을 할당하여 접근하는 방식
-<br><br>    
-  - Offset
-      - 주변 장치의 Base Address로부터 상대적인 거리(주변 장치 내부 Register 주소)
-<br><br><br>    
+#### Memory-Mapped I/O (MMIO) & Offset
+* CPU가 별도의 I/O 전용 명령어 없이 **일반 메모리 주소 공간(Address Space)**을 사용하여 주변 장치에 접근합니다.
+* **Offset:** Peripheral의 Base Address를 기준으로 내부 레지스터에 접근하기 위한 상대 주소입니다.
 
-## 2. Hardware Architecture
+---
 
-### 2.1 Overall Structure
-<img width="953" height="555" alt="image" src="https://github.com/user-attachments/assets/1c5d55da-386a-45b5-b02e-8f3085ced0be" />
+## 2. Hardware Architecture & System Design
 
-- Multi-cycle CPU Core
-  - 명령어의 실행 과정을 Fetch, Decode, Execute, Memory, Write-Back로 분할해 순차적으로 처리하는 프로세서 코어
-<br><br>
-- APB Master
-  - CPU의 Read/Write 요청을 받아 AMBA APB 버스 프로토콜 규격에 맞는 제어 신호를 생성하여 주변 장치들과의 통신
-<br><br>
-- APB Slave
-  - APB Master가 생성한 제어 신호와 주소에 따라 데이터 저장, 외부 출력 등을 수행하고 결과를 Master에게 응답
-<br><br><br>
+### 2.1 Overall System Architecture
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/1c5d55da-386a-45b5-b02e-8f3085ced0be" width="80%" alt="Overall Architecture">
+</p>
 
+* **Multi-cycle CPU Core:** 5단계 상태 머신(FSM)을 통해 명령어를 분할 처리
+* **APB Master:** CPU의 메모리 요청을 APB 버스 프로토콜 타임에 맞춰 슬레이브 제어 신호로 변환
+* **APB Slaves:** 메모리 맵(MMIO) 영역에 매핑되어 각 I/O 동작 수행
 
-### 2.2 Core
-<img width="913" height="586" alt="image" src="https://github.com/user-attachments/assets/7d1aab43-9888-432e-b5c5-0f0f12a9661c" />
+---
 
-- 5-stage
-  - IF : 메모리에서 명령어를 Fetch
-  - ID : 명령어 해석, 레지스터에서 값 가져옴 
-  - EX : ALU에서 연산 실행
-  - MEM : DATA MEM에 값을 쓰거나 저장
-  - WB : 결과값을 다시 레지스터에 저장
-<br><br>
-- Single-cycle -> Multi-cycle 장점
-  - Instruction 실행 시, 한 사이클 만에 처리하기 힘든 복잡한 명령어(LW, SW)의 실행 과정을 분할하여 Critical Path를 단축 
-  - 이를 통해, 클럭 주기를 짧게, 즉, 최대 동작 주파수를 크게 설정 가능
+### 2.2 Datapath & Control Unit
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/7d1aab43-9888-432e-b5c5-0f0f12a9661c" width="80%" alt="Core Architecture">
+</p>
 
-<br><br><br>
+* Multi-cycle 구조를 채택함으로써 단일 사이클 대비 **Critical Path를 대폭 줄여 동작 주파수(Max Frequency)를 대폭 향상**시켰습니다.
 
-### 2.3 APB
-<img width="591" height="572" alt="image" src="https://github.com/user-attachments/assets/26326cea-1d5a-4d06-b674-2be011ce302b" />
+---
 
+### 2.3 APB Master & Interconnect System
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/26326cea-1d5a-4d06-b674-2be011ce302b" width="60%" alt="APB Bus Connection">
+</p>
 
-- APB Master
-  - 모든 slave에 Address와 Data를 뿌려주는 broadcasting 방식 적용
-  - APB Interface 주요 신호
-    : PSEL, PENABLE, PWRITE, PADDR, PWDATA, PRDATA, PREADY, PSLVERR
-<br><br>
-- APB Slave
-  - RAM, GPO, GPIO, FND, UART를 APB Slave로 구성
+* **Broadcasting 구조:** Address 및 Data 버스는 모든 Slave 라인에 공통 연결
+* **Slave MUXing:** 주소 디코더를 거쳐 `PSELx` 신호를 슬레이브별 개별 전달 및 `PRDATA` 선택
 
-<br><br><br>
+---
 
-### 2.4 MMIO
-<img width="881" height="446" alt="image" src="https://github.com/user-attachments/assets/c7ec121e-5d82-4270-b434-2ae4dfa3497d" />
+### 2.4 Memory-Mapped I/O (MMIO) Map
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c7ec121e-5d82-4270-b434-2ae4dfa3497d" width="80%" alt="MMIO Memory Map">
+</p>
 
-<전체 MMIO>
+#### Address Allocation Table
+| Target Peripheral | Base Address Range | Description |
+| :--- | :--- | :--- |
+| **BRAM (RAM)** | Memory Map 내 할당 | 메인 데이터 메모리 영역 |
+| **UART** | Memory Map 내 할당 | PC-FPGA 간 시리얼 통신 |
+| **FND Controller** | Memory Map 내 할당 | 7-Segment 상태 표시 |
+| **GPIO / GPO** | Memory Map 내 할당 | 스위치 입력 및 LED 제어 |
 
-- UART, FND, GPIO, GPI(사용 x), GPO, BRAM
+---
 
+## 3. Implementation Results & Analysis
 
-<br><br><br>
+### 3.1 Hardware Demonstration (Basys3 FPGA)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d3421272-af6c-4ab2-9e77-97f5e4521b5c" width="70%" alt="FPGA Board Demo">
+</p>
 
-## 3. Result
+* **UP/DOWN Game Flow (Embedded C Application):**
+  1. PC Terminal (UART)로 4자리 정답값 설정 후 `'s'` 전송
+  2. Basys3 온보드 Switch를 사용해 예측 값 입력
+  3. UART로 `'i'` 입력 전송하여 비교 수행
+  4. 비교 결과에 따라 FND 7-Segment에 **`PASS`**, **`LOW`**, **`HIGH`** 실시간 출력
 
-### 3.1 FPGA
-<img width="723" height="405" alt="image" src="https://github.com/user-attachments/assets/d3421272-af6c-4ab2-9e77-97f5e4521b5c" />
+---
 
-<C 코드(UP, DOWN game) 적용 사진>
+### 3.2 Timing & Power Analysis Comparison
 
-<br><br>
-### 3.2 UP, DOWN GAME
-- C code(UP, DOWN 게임)
-  - UART로 4자리 정답값 설정 후 ‘s’ send
-  - Switch로 예측값 설정
-  - UART로 ‘i’ send
-  - 예측값과 정답값을 비교
-  - FND에 ‘PASS’, ‘LOW’, ‘HIGH’ 출력
+| Single-cycle RV32I Result | Multi-cycle RV32I Result (Proposed) |
+| :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/a5fc54e7-3e71-4114-85e8-024cfd799c7c" width="100%"> | <img src="https://github.com/user-attachments/assets/c3c9eabf-b1ba-4379-baf0-ac255819ad6b" width="100%"> |
 
-<br><br><br>
-
-
-
-<동영상>
-
-<br><br><br>
-
-### 3.3 IMPLEMENTATION
-<img width="450" height="210" alt="image" src="https://github.com/user-attachments/assets/a5fc54e7-3e71-4114-85e8-024cfd799c7c" />
-
-<Timing, Power Analysis of Single-cycle RV32I>
-
-<br><br>
-<img width="450" height="210" alt="image" src="https://github.com/user-attachments/assets/c3c9eabf-b1ba-4379-baf0-ac255819ad6b" />
-
-<Timing, Power Analysis of Multi-cycle RV32I>
+> **💡 Synthesis & Implementation Result Analysis**
+> * **Critical Path 개선:** Single-cycle 대비 명령어 실행 경로가 Stage별로 분할되어 **Data Path Latency(WNS/Setup Slack)가 대폭 개선**되었습니다.
+> * **동작 주파수 향상:** 클럭 주기를 단축할 수 있어 더 높은 주파수 대역폭 확보가 가능해졌습니다.
