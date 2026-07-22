@@ -107,17 +107,15 @@
 ---
 
 ### 2.4 Memory-Mapped I/O (MMIO) Map
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/c7ec121e-5d82-4270-b434-2ae4dfa3497d" width="80%" alt="MMIO Memory Map">
-</p>
 
 #### Address Allocation Table
 | Target Peripheral | Base Address Range | Description |
 | :--- | :--- | :--- |
-| **BRAM (RAM)** | Memory Map 내 할당 | 메인 데이터 메모리 영역 |
-| **UART** | Memory Map 내 할당 | PC-FPGA 간 시리얼 통신 |
-| **FND Controller** | Memory Map 내 할당 | 7-Segment 상태 표시 |
-| **GPIO / GPO** | Memory Map 내 할당 | 스위치 입력 및 LED 제어 |
+| **BRAM (RAM)** | 0x1000_0000 - 0x1000_0FFF | 메인 데이터 메모리 영역 |
+| **GPO** | 0x2000_0000 - 0x2000_0FFF | x |
+| **GPIO** | 0x2000_2000 - 0x2000_2FFF | 스위치 입력 및 LED 제어 |
+| **FND Controller** | 0x2000_3000 - 0x2000_3FFF | 7-Segment 상태 표시 |
+| **UART** | 0x2000_4000 - 0x2000_4FFF | PC-FPGA 간 시리얼 통신 |
 
 ---
 
