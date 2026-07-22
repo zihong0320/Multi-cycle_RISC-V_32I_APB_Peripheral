@@ -133,8 +133,15 @@
   4. 비교 결과에 따라 FND 7-Segment에 **`PASS`**, **`LOW`**, **`HIGH`** 실시간 출력
 
 ---
+### 3.2 Demo Video
 
-### 3.2 Timing & Power Analysis Comparison
+https://github.com/user-attachments/assets/3090e5e8-7bf6-418e-8116-ea1d8cf214fd
+
+
+
+
+---
+### 3.3 Timing & Power Analysis Comparison
 
 | Single-cycle RV32I Result | Multi-cycle RV32I Result (Proposed) |
 | :---: | :---: |
