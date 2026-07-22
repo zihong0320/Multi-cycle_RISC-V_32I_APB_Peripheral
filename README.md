@@ -20,7 +20,7 @@
 
 ---
 
-## 1. Background & Fundamentals
+## 📚 1. Introduction & Background
 
 ### 1.1 RISC-V & Harvard Architecture
 * **RISC-V (ISA):** 2010년 UC 버클리에서 개방한 오픈소스 ISA로, 모듈형 설계 및 단순한 명령어 구조가 특징입니다.
@@ -74,7 +74,7 @@
 
 ---
 
-## 2. Hardware Architecture & System Design
+## 🧩 2. Hardware Architecture & System Design
 
 ### 2.1 Overall System Architecture
 <p align="center">
@@ -121,7 +121,7 @@
 
 ---
 
-## 3. Implementation Results & Analysis
+## 📊 3. Implementation Results & Analysis
 
 ### 3.1 Hardware Demonstration (Basys3 FPGA)
 <p align="center">
