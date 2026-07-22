@@ -23,10 +23,10 @@
 ## 📚 1. Introduction & Background
 
 ### 1.1 RISC-V & Harvard Architecture
-* **RISC-V (ISA):** 2010년 UC 버클리에서 개방한 오픈소스 ISA로, 모듈형 설계 및 단순한 명령어 구조가 특징입니다.
+* **RISC-V (ISA):** 2010년 UC 버클리에서 개방한 오픈소스 ISA로, 모듈형 설계 및 단순한 명령어 구조가 특징
 * **Harvard Architecture:**
-  * **Instruction Memory**와 **Data Memory**의 **버스 및 메모리 영역이 물리적으로 분리**된 구조입니다.
-  * 명령어 Fetch와 데이터 Read/Write가 동시에 수행 가능하여 Von Neumann 구조 대비 **병목 현상이 적고 동작 속도가 빠릅니다.**
+  * **Instruction Memory**와 **Data Memory**의 **버스 및 메모리 영역이 물리적으로 분리**된 구조
+  * 명령어 Fetch와 데이터 Read/Write가 동시에 수행 가능하여 Von Neumann 구조 대비 **병목 현상이 적고 동작 속도가 빠름**
 
 #### RISC-V 32I Instruction Formats (6가지)
 | Format | Description | Target Instructions |
@@ -41,8 +41,8 @@
 ---
 
 ### 1.2 Multi-Cycle CPU Architecture
-* **Single-Cycle의 한계:** 가장 오랫동안 실행되는 명령어(e.g., `LW`)의 Critical Path 시간에 맞춰 클럭 주기를 크게 설정해야 하므로 최대 동작 주파수가 낮아집니다.
-* **Multi-Cycle의 장점:** 명령어를 실행 단계별(최대 5 Stages)로 분할하여 **클럭 주기를 단축(최대 동작 주파수 향상)**시킵니다.
+* **Single-Cycle의 한계:** 가장 오랫동안 실행되는 명령어(e.g., `LW`)의 Critical Path 시간에 맞춰 클럭 주기를 크게 설정해야 하므로 최대 동작 주파수가 낮아짐
+* **Multi-Cycle의 장점:** 명령어를 실행 단계별(최대 5 Stages)로 분할하여 **클럭 주기를 단축(최대 동작 주파수 향상)**시킴
 
 #### 5-Stage Execution Flow
 1. **IF (Instruction Fetch):** 메모리에서 명령어를 가져옴
@@ -56,8 +56,8 @@
 ### 1.3 APB Bus Interface & MMIO
 
 #### AMBA APB (Advanced Peripheral Bus)
-* 저속/저전력 주변장치 제어에 최적화된 단순 구조 버스 프로토콜입니다.
-* **Broadcasting & Selective Enable:** 마스터가 Address/Data를 모든 슬레이브 라인에 전송하면, 지정된 슬레이브만 `PSELx` 신호를 활성화하여 응답합니다.
+* 저속/저전력 주변장치 제어에 최적화된 단순 구조의 버스 프로토콜
+* **Broadcasting & Selective Enable:** 마스터가 Address/Data를 모든 슬레이브 라인에 전송하면, 지정된 슬레이브만 `PSELx` 신호를 활성화하여 응답
 
 #### 주요 APB 신호선
 * `PCLK`, `PRESETn` : 시스템 클럭 및 Active-Low 리셋
@@ -69,8 +69,8 @@
 * `PREADY` : 슬레이브 응답 준비 완료 신호
 
 #### Memory-Mapped I/O (MMIO) & Offset
-* CPU가 별도의 I/O 전용 명령어 없이 **일반 메모리 주소 공간(Address Space)**을 사용하여 주변 장치에 접근합니다.
-* **Offset:** Peripheral의 Base Address를 기준으로 내부 레지스터에 접근하기 위한 상대 주소입니다.
+* CPU가 별도의 I/O 전용 명령어 없이 **일반 메모리 주소 공간(Address Space)**을 사용하여 주변 장치에 접근
+* **Offset:** Peripheral의 Base Address를 기준으로 내부 레지스터에 접근하기 위한 상대 주소
 
 ---
 
@@ -92,7 +92,7 @@
   <img src="https://github.com/user-attachments/assets/7d1aab43-9888-432e-b5c5-0f0f12a9661c" width="80%" alt="Core Architecture">
 </p>
 
-* Multi-cycle 구조를 채택함으로써 단일 사이클 대비 **Critical Path를 대폭 줄여 동작 주파수(Max Frequency)를 대폭 향상**시켰습니다.
+* Multi-cycle 구조를 채택함으로써 단일 사이클 대비 **Critical Path를 대폭 줄여 동작 주파수(Max Frequency)를 대폭 향상**시킴
 
 ---
 
@@ -143,5 +143,5 @@
 | <img src="https://github.com/user-attachments/assets/a5fc54e7-3e71-4114-85e8-024cfd799c7c" width="100%"> | <img src="https://github.com/user-attachments/assets/c3c9eabf-b1ba-4379-baf0-ac255819ad6b" width="100%"> |
 
 > **💡 Synthesis & Implementation Result Analysis**
-> * **Critical Path 개선:** Single-cycle 대비 명령어 실행 경로가 Stage별로 분할되어 **Data Path Latency(WNS/Setup Slack)가 대폭 개선**되었습니다.
-> * **동작 주파수 향상:** 클럭 주기를 단축할 수 있어 더 높은 주파수 대역폭 확보가 가능해졌습니다.
+> * **Critical Path 개선:** Single-cycle 대비 명령어 실행 경로가 Stage별로 분할되어 **Data Path Latency(WNS/Setup Slack)가 대폭 개선**됨.
+> * **동작 주파수 향상:** 클럭 주기를 단축할 수 있어 더 높은 주파수 대역폭 확보가 가능해짐
