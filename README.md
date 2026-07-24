@@ -1,4 +1,4 @@
-# 🚀 Multi-cycle RISC-V 32I Core & APB Peripheral Project
+# 🧠 Multi-cycle RISC-V 32I Core & APB Peripheral Project
 
 > **Basys3 FPGA 기반 Multi-cycle RISC-V (RV32I) 프로세서 및 APB 버스 기반 Peripherals 설계 프로젝트**
 
