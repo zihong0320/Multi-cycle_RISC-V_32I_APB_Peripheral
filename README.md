@@ -42,7 +42,7 @@
 
 ### 1.2 Multi-Cycle CPU Architecture
 * **Single-Cycle의 한계:** 가장 오랫동안 실행되는 명령어(e.g., `LW`)의 Critical Path 시간에 맞춰 클럭 주기를 크게 설정해야 하므로 최대 동작 주파수가 낮아짐
-* **Multi-Cycle의 장점:** 명령어를 실행 단계별(최대 5 Stages)로 분할하여 **클럭 주기를 단축(최대 동작 주파수 향상)**시킴
+* **Multi-Cycle의 장점:** 명령어를 실행 단계별(최대 5 Stages)로 분할하여 **클럭 주기를 단축(최대 동작 주파수 향상)** 시킴
 
 #### 5-Stage Execution Flow
 1. **IF (Instruction Fetch):** 메모리에서 명령어를 가져옴
